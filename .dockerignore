@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output directories (they will be mounted as volumes)
+data/processed/*
+models/*
+reports/*
+output/*
+
+# Keep structure files
+!data/processed/.gitkeep
+!models/.gitkeep
+!reports/.gitkeep
+!output/.gitkeep
+
+# Documentation (already copied in Dockerfile)
+*.md
+
+# Large files
+*.log

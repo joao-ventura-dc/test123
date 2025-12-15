@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  poc-posturas:
+    build: .
+    container_name: poc_posturas_ia
+    volumes:
+      # Mount data directory to persist results
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./output:/app/output
+      # Mount biomechanic scores (read-only)
+      - ./biomechanic scores:/app/biomechanic scores:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python src/main_pipeline.py
+
+  # Jupyter notebook for interactive analysis (optional)
+  jupyter:
+    build: .
+    container_name: poc_posturas_jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+      - ./biomechanic scores:/app/biomechanic scores:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser
+      --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+    profiles:
+      - jupyter
